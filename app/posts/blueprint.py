@@ -4,8 +4,7 @@ from flask import Blueprint
 from flask import render_template
 from flask import request
 from flask import redirect, url_for
-
-from sqlalchemy import desc
+from flask_security import login_required
 
 from models import Post, Tag
 from .forms import PostForm
@@ -16,6 +15,7 @@ posts = Blueprint('posts', __name__, template_folder='templates')
 
 
 @posts.route('/create', methods=['POST', 'GET'])
+@login_required
 def create_post():
     if request.method == 'POST':
         title = request.form['title']
@@ -34,6 +34,7 @@ def create_post():
 
 
 @posts.route('/<slug>/update', methods=['POST', 'GET'])
+@login_required
 def update_post(slug):
     post = Post.query.filter(Post.slug == slug).first()
     if request.method == 'POST':
@@ -48,6 +49,7 @@ def update_post(slug):
 
 
 @posts.route('/<slug>/delete', methods=['POST', 'GET'])
+@login_required
 def delete_post(slug):
     post = Post.query.filter(Post.slug == slug).first()
     print('test')
