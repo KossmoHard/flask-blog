@@ -14,7 +14,14 @@ from app import db
 posts = Blueprint('posts', __name__, template_folder='templates')
 
 
-@posts.route('/create', methods=['POST', 'GET'])
+@posts.route('admin/')
+def admin_panel():
+    post = Post.query.all()
+    tags = Tag.query.all()
+    return render_template('admin/admin_panel.html', posts=post, tags=tags)
+
+
+@posts.route('/admin/posts/create', methods=['POST', 'GET'])
 @login_required
 def create_post():
     if request.method == 'POST':
@@ -30,10 +37,10 @@ def create_post():
         return redirect(url_for('posts.index'))
 
     form = PostForm()
-    return render_template('posts/create_post.html', form=form)
+    return render_template('admin/create_post.html', form=form)
 
 
-@posts.route('/<slug>/update', methods=['POST', 'GET'])
+@posts.route('/admin/posts/<slug>/update', methods=['POST', 'GET'])
 @login_required
 def update_post(slug):
     post = Post.query.filter(Post.slug == slug).first()
@@ -45,10 +52,10 @@ def update_post(slug):
         return redirect(url_for('posts.post_detail', slug=post.slug))
 
     form = PostForm(obj=post)
-    return render_template('posts/update_post.html', post=post, form=form)
+    return render_template('admin/update_post.html', post=post, form=form)
 
 
-@posts.route('/<slug>/delete', methods=['POST', 'GET'])
+@posts.route('admin/posts/<slug>/delete', methods=['POST', 'GET'])
 @login_required
 def delete_post(slug):
     post = Post.query.filter(Post.slug == slug).first()
@@ -59,7 +66,7 @@ def delete_post(slug):
         db.session.commit()
         return redirect(url_for('posts.index'))
 
-    return render_template('posts/delete_post.html', post=post)
+    return render_template('admin/delete_post.html', post=post)
 
 
 @posts.route('/')

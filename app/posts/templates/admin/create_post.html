@@ -1,12 +1,11 @@
-{% extends 'base.html' %}
+{% extends 'admin/base.html' %}
 
-{% block title %}
+{% block title_content %}
     Create Post
 {% endblock %}
 
 {% block content %}
-    <h2>Create Post</h2>
-    <div class="col-md-6">
+    <div class="col-md-12">
         <form action="{{ url_for('posts.create_post') }}" method="POST">
 
             {% for field in form %}
