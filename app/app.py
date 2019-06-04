@@ -6,11 +6,12 @@ from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
 from flask_login import LoginManager
 from flask_security import SQLAlchemyUserDatastore, Security
+from flask_mail import Mail
 
 app = Flask(__name__)
 app.config.from_object(Configuration)
 db = SQLAlchemy(app)
-
+mail = Mail(app)
 
 migrate = Migrate(app, db)
 manager = Manager(app)

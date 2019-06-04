@@ -1,0 +1,15 @@
+{% extends 'admin/base.html' %}
+
+{% block title_content %}
+    Delete "{{ tag.name }}"
+{% endblock %}
+
+{% block content %}
+
+    <div class="col-md-12">
+        <form action="{{ url_for('posts.delete_tag', slug=tag.slug) }}" method="POST">
+            <button type="submit" class="btn btn-primary">Delete</button>
+        </form>
+    </div>
+
+{% endblock %}

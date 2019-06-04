@@ -9,9 +9,11 @@
     <h2>Posts for "{{ tag.name }}" tag:</h2>
 
     {% for post in posts %}
+    <div class="col-sm-12">
         <div class="post">
             <a href="{{ url_for('posts.post_detail', slug=post.slug) }}">{{ post.title }}</a>
         </div>
+    </div>
     {% endfor %}
 
 {% endblock %}

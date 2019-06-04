@@ -5,14 +5,17 @@
 {% endblock %}
 
 {% block content %}
-    <div class="tags">
-        {% for tag in tags %}
-           <a href="{{ url_for('posts.tag_detail', slug=tag.slug) }}">
-               <span class="badge badge-secondary">{{ tag.name }}</span>
-           </a>
-        {% endfor %}
+    <div class="col-sm-12">
+        <div class="tags">
+            {% for tag in tags %}
+               <a href="{{ url_for('posts.tag_detail', slug=tag.slug) }}">
+                   <span class="badge badge-secondary">{{ tag.name }}</span>
+               </a>
+            {% endfor %}
+        </div>
+        <div class="title">
+            <h2>{{ post.title }}</h2>
+        </div>
+        <p>{{ post.description }}</p>
     </div>
-
-    <h2>{{ post.title }}</h2>
-    <p>{{ post.description }}</p>
 {% endblock %}

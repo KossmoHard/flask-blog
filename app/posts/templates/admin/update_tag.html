@@ -1,20 +1,17 @@
 {% extends 'admin/base.html' %}
 
 {% block title %}
-    Update "{{ post.title }}"
+    Update "{{ tag.name }}"
 {% endblock %}
 
 {% block content %}
     <div class="col-md-12">
-        <form action="{{ url_for('posts.update_post', slug=post.slug) }}" method="POST">
-
+        <form action="{{ url_for('posts.update_tag', slug=tag.slug) }}" method="POST">
             {% for field in form %}
                 <div class="form-group">
-
                     {% if field.id != 'csrf_token' %}
                         {{ field.label(class='control-label') }}
                     {% endif %}
-
                     {{ field(class='form-control') }}
                     {% for error in field.errors %}
                         <div class="alert alert-danger" role="alert">
@@ -23,7 +20,6 @@
                     {% endfor %}
                 </div>
             {% endfor %}
-
             <button type="submit" class="btn btn-primary">Update</button>
         </form>
     </div>
