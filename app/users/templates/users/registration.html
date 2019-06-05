@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Registration
+{% endblock %}
+
+{% block content %}
+<div class="offset-md-3 col-md-6">
+    <h2>Registration</h2>
+    {% if error %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+    {% endif %}
+    <form method="POST" action="{{ url_for('users.registration') }}">
+        {% for field in form %}
+        <div class="form-group">
+            {% if field.id != 'csrf_token' %}
+            {{ field.label(class='control-label') }}
+            {% endif %}
+            {{ field(class='form-control') }}
+            {% for error in field.errors %}
+            <div class="alert alert-danger" role="alert">
+                {{ error }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-success">Login</button>
+    </form>
+</div>
+{% endblock %}

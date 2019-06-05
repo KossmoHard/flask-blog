@@ -4,7 +4,7 @@ from flask import Blueprint
 from flask import render_template
 from flask import request
 from flask import redirect, url_for
-from flask_security import login_required
+from flask_login import login_required
 
 from models import Post, Tag
 from .forms import PostForm, TagForm

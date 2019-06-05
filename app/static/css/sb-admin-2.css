@@ -12058,3 +12058,6 @@ footer.sticky-footer .copyright {
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
 }
+#userDropdown .fa-user{
+    font-size: 25px;
+}

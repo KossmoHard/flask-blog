@@ -1,4 +1,12 @@
 .tags{
-display: block;
-width: 100%;
+    display: block;
+    width: 100%;
+}
+.card-body{
+    height: 340px;
+    max-height: 340px;
+    overflow: hidden;
+}
+#userDropdown .fa-user{
+    font-size: 25px;
 }

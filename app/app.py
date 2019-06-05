@@ -11,7 +11,7 @@ from flask_mail import Mail
 app = Flask(__name__)
 app.config.from_object(Configuration)
 db = SQLAlchemy(app)
-mail = Mail(app)
+
 
 migrate = Migrate(app, db)
 manager = Manager(app)
@@ -21,9 +21,11 @@ manager.add_command('db', MigrateCommand)
 ### Flask Login ###
 
 login_manager = LoginManager()
+login_manager.init_app(app)
 
-### Flask-security ###
-from users.models import *
+from users.models import User
 
-user_datastore = SQLAlchemyUserDatastore(db, User, Role)
-security = Security(app, user_datastore)
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
